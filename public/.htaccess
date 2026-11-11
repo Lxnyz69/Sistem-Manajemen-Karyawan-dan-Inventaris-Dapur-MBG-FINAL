@@ -1,0 +1,10 @@
+Options -Indexes
+RewriteEngine On
+
+# File/direktori fisik yang ada langsung dilayani
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Selain itu -> front controller
+RewriteRule ^ index.php [QSA,L]

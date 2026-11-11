@@ -1,0 +1,76 @@
+/* Halaman Tugas Kurir (di atas ui.css, tampilan dasbor). Mobile-first. */
+body.has-bnav{padding-bottom:calc(4rem + env(safe-area-inset-bottom))}
+.f-content{max-width:44rem}
+.bnav{position:fixed;left:0;right:0;bottom:0;z-index:40;display:flex;justify-content:center;background:var(--panel,#fff);border-top:1px solid var(--line,#e2e5ea);padding-bottom:env(safe-area-inset-bottom);box-shadow:0 -4px 16px rgba(15,23,42,.06)}
+.bnav a{display:flex;flex-direction:column;align-items:center;gap:.15rem;min-width:6rem;padding:.55rem 1.2rem;font-size:.72rem;font-weight:600;text-decoration:none;color:var(--muted,#6b7686)}
+.bnav a i{font-size:1.15rem}
+.bnav a.on{color:var(--c-primary,#071e48);position:relative}
+.bnav a.on::before{content:"";position:absolute;top:0;left:25%;right:25%;height:3px;border-radius:0 0 3px 3px;background:var(--c-primary,#071e48)}
+.f-hello{display:flex;align-items:center;gap:.8rem;margin-bottom:1rem}
+.f-hello .ico{width:2.8rem;height:2.8rem;border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--c-primary,#071e48);color:#fff;font-size:1.2rem}
+.f-hello h2{margin:0;font-size:1.15rem}.f-hello p{margin:.1rem 0 0;color:var(--muted,#6b7686);font-size:.85rem}
+/* status GPS */
+.gps{display:flex;align-items:center;gap:.6rem;padding:.65rem .9rem;border-radius:12px;background:var(--panel,#fff);border:1px solid var(--line,#e2e5ea);margin-bottom:1rem;font-size:.85rem}
+.gps::before{content:"";flex:0 0 auto;width:.65rem;height:.65rem;border-radius:50%;background:#9aa3b0}
+.gps[data-state=on]{background:#e6f4ec;border-color:#b7e0c9}.gps[data-state=on]::before{background:#17794a;animation:lvpulse 1.6s infinite}
+.gps[data-state=wait]::before{background:#d99a00}.gps[data-state=err]{background:#fbe7e5;border-color:#f1bcb7}.gps[data-state=err]::before{background:#b3261e}
+/* wajib GPS */
+.gps-gate{display:none;position:fixed;inset:0;z-index:80;align-items:center;justify-content:center;padding:1rem;background:rgba(15,23,42,.78);backdrop-filter:blur(3px)}
+body.gps-locked .gps-gate{display:flex}
+body.gps-locked{overflow:hidden}
+.gps-gate-card{width:100%;max-width:26rem;max-height:92vh;overflow:auto;background:#fff;border-radius:16px;padding:1.4rem 1.2rem;text-align:center;box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.gps-gate-ico{width:3.6rem;height:3.6rem;margin:0 auto .8rem;border-radius:50%;background:#fbe7e5;color:#b3261e;display:flex;align-items:center;justify-content:center;font-size:1.5rem}
+.gps-gate[data-mode=wait] .gps-gate-ico{background:#fdf1d6;color:#8a5a00}
+.gps-gate h2{margin:0 0 .4rem;font-size:1.1rem}.gps-gate p{margin:0 0 .9rem;color:var(--ink-2,#4a5565);font-size:.88rem}
+.gps-gate ol{text-align:left;margin:0 0 1rem;padding-left:1.2rem;font-size:.82rem;color:var(--ink-2,#4a5565)}
+.gps-gate ol li{margin-bottom:.35rem}.gps-gate code{background:#f1f3f6;padding:.1rem .3rem;border-radius:4px;word-break:break-all;font-size:.78rem}
+.gps-gate ol[hidden]{display:none}
+.gps-gate .btn{width:100%;min-height:2.9rem;justify-content:center}
+/* kartu tugas */
+.job{background:var(--panel,#fff);border:1px solid var(--line,#e2e5ea);border-radius:16px;margin-bottom:1rem;overflow:hidden;box-shadow:0 1px 2px rgba(15,23,42,.04)}
+.job-top{display:flex;justify-content:space-between;gap:.6rem;align-items:flex-start;padding:1rem 1rem .6rem}
+.job-top h3{margin:0;font-size:1.05rem;line-height:1.25}.job-sub{margin:.2rem 0 0;color:var(--ink-2,#4a5565);font-size:.84rem}
+.job.is-transit{border-color:var(--c-primary,#071e48);box-shadow:0 0 0 1px var(--c-primary,#071e48),0 6px 18px rgba(15,23,42,.08)}
+.job.done{opacity:.72}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);list-style:none;margin:.2rem 1rem .9rem;padding:0;counter-reset:s}
+.steps li{position:relative;text-align:center;font-size:.64rem;line-height:1.2;color:var(--muted,#6b7686);padding-top:1.7rem;counter-increment:s}
+.steps li::before{content:counter(s);position:absolute;top:0;left:50%;transform:translateX(-50%);width:1.35rem;height:1.35rem;border-radius:50%;background:#e3e7ec;color:#6b7686;font-weight:700;font-size:.7rem;display:flex;align-items:center;justify-content:center;z-index:1}
+.steps li::after{content:"";position:absolute;top:.62rem;left:calc(-50% + .7rem);right:calc(50% + .7rem);height:2px;background:#e3e7ec}
+.steps li:first-child::after{display:none}
+.steps li.done::before,.steps li.now::before{background:var(--c-primary,#071e48);color:#fff}
+.steps li.done::after,.steps li.now::after{background:var(--c-primary,#071e48)}
+.steps li.now{color:var(--ink,#1c2430);font-weight:700}
+.job-info{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;padding:0 1rem .8rem;font-size:.78rem;color:var(--muted,#6b7686)}
+.job-info b{display:block;color:var(--ink,#1c2430);font-weight:600;font-size:.85rem}
+.job-addr{padding:0 1rem .8rem;font-size:.84rem;color:var(--ink-2,#4a5565)}.job-addr i{color:var(--muted,#6b7686);margin-right:.3rem}
+.job-act{padding:.8rem 1rem 1rem;background:#f8f9fb;border-top:1px solid var(--line-soft,#eceff3)}
+.job-btn{display:flex;align-items:center;justify-content:center;gap:.5rem;width:100%;min-height:3.1rem;border-radius:12px;border:0;background:var(--c-button,#071e48);color:#fff;font:inherit;font-weight:700;font-size:1rem;cursor:pointer}
+.job-btn:disabled{opacity:.6}
+.job-links{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-top:.55rem}
+.job-links a{display:flex;align-items:center;justify-content:center;gap:.4rem;min-height:2.7rem;border:1px solid var(--line,#e2e5ea);border-radius:12px;text-decoration:none;font-weight:600;font-size:.85rem;background:#fff;color:var(--ink,#1c2430)}
+.job details{margin:0 0 .7rem}.job summary{cursor:pointer;color:var(--c-primary,#071e48);font-size:.84rem;font-weight:600;min-height:2rem;display:flex;align-items:center}
+.job textarea{width:100%;min-height:4rem;font:inherit;padding:.55rem;border:1px solid var(--line,#e2e5ea);border-radius:10px;margin-top:.3rem}
+.f-empty{background:var(--panel,#fff);border:1px dashed var(--line,#e2e5ea);border-radius:16px;padding:2.2rem 1rem;text-align:center;color:var(--muted,#6b7686)}
+.f-empty i{display:block;font-size:2rem;margin-bottom:.6rem;opacity:.5}
+.gps-sync{margin-left:auto;color:var(--muted,#6b7686);font-size:.72rem;white-space:nowrap}
+.adv-modal{position:fixed;inset:0;z-index:90;display:flex;align-items:flex-end;justify-content:center;background:rgba(15,23,42,.6);padding:0}
+.adv-modal[hidden]{display:none}
+.adv-box{width:100%;max-width:28rem;background:#fff;border-radius:18px 18px 0 0;padding:1.3rem 1.2rem calc(1.2rem + env(safe-area-inset-bottom));text-align:center;animation:advUp .25s ease-out}
+@media (min-width:640px){.adv-modal{align-items:center;padding:1rem}.adv-box{border-radius:18px}}
+@keyframes advUp{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+.adv-ico{width:3.2rem;height:3.2rem;margin:0 auto .6rem;border-radius:50%;background:#e6f0fa;color:#1d5fa8;display:flex;align-items:center;justify-content:center;font-size:1.4rem}
+.adv-box h3{margin:0 0 .3rem;font-size:1.1rem}.adv-box p{margin:0 0 1.1rem;color:var(--ink-2,#4a5565);font-size:.9rem}
+.adv-actions{display:grid;grid-template-columns:1fr 1.4fr;gap:.6rem}.adv-actions .btn{min-height:3rem;justify-content:center}
+.job{transition:border-color .3s,box-shadow .3s,opacity .3s}
+.job-btn.swap{animation:btnSwap .6s ease-out}
+@keyframes btnSwap{0%{transform:scale(.94);opacity:.3}60%{transform:scale(1.03);opacity:1}100%{transform:none}}
+.job-btn.is-busy{pointer-events:none}
+.job{animation:jobIn .4s ease-out}
+@keyframes jobIn{from{transform:translateY(10px);opacity:0}to{transform:none;opacity:1}}
+.job.is-hidden{display:none}
+.f-search{position:relative;margin-bottom:1rem}
+.f-search i{position:absolute;left:.9rem;top:50%;transform:translateY(-50%);color:var(--muted,#6b7686)}
+.f-search input{width:100%;min-height:2.9rem;padding:0 2.6rem;border:1px solid var(--line,#e2e5ea);border-radius:12px;background:#fff;font:inherit}
+.f-search input:focus{outline:2px solid var(--c-primary,#071e48);outline-offset:1px}
+.f-search button{position:absolute;right:.4rem;top:50%;transform:translateY(-50%);width:2.2rem;height:2.2rem;border:0;background:none;font-size:1.3rem;color:var(--muted,#6b7686);cursor:pointer}
+.f-search button[hidden]{display:none}

@@ -1,0 +1,65 @@
+/* Gerak halus & penyesuaian layar kecil untuk dashboard. HANYA transisi/animasi + perbaikan mobile;
+   warna, ukuran, dan tata letak desktop tidak diubah. Otomatis mati bila pengguna memilih "kurangi gerakan". */
+@keyframes mo-rise{from{opacity:0;transform:translateY(10px)}}
+@keyframes mo-pop{from{opacity:0;transform:scale(.96) translateY(6px)}}
+@keyframes mo-drop{from{opacity:0;transform:translateY(-6px)}}
+@keyframes mo-fade{from{opacity:0}}
+@keyframes mo-slide-in{from{opacity:0;transform:translateX(24px)}}
+@keyframes mo-grow{from{transform:scaleX(0)}}
+@keyframes mo-sheet{from{opacity:0;transform:translateY(24px)}}
+
+/* Kartu, panel, dan metrik muncul berurutan */
+.content .panel,.content .metric,.content .attn>*,.content .dist-page>*{animation:mo-rise .45s cubic-bezier(.2,.7,.2,1) backwards}
+.content .panel:nth-child(2),.content .metrics>.metric:nth-child(2){animation-delay:.05s}
+.content .panel:nth-child(3),.content .metrics>.metric:nth-child(3){animation-delay:.1s}
+.content .panel:nth-child(4),.content .metrics>.metric:nth-child(4){animation-delay:.15s}
+.content .panel:nth-child(n+5),.content .metrics>.metric:nth-child(n+5){animation-delay:.2s}
+/* Batang grafik tumbuh */
+.bar-fill{transform-origin:left center;animation:mo-grow .8s cubic-bezier(.2,.7,.2,1) .15s backwards}
+/* Interaksi */
+.panel{transition:box-shadow .2s ease,border-color .2s ease}
+.panel:hover{box-shadow:0 6px 20px rgba(15,23,42,.06)}
+.metric{transition:background-color .2s ease}.metrics>.metric:hover{background:rgba(15,23,42,.02)}
+.btn,.icon-btn,.user-chip,.nav-link,.user-dropdown-item{transition:background-color .15s ease,border-color .15s ease,color .15s ease,filter .15s ease,transform .1s ease,box-shadow .15s ease}
+.btn:hover:not([disabled]){box-shadow:0 2px 8px rgba(15,23,42,.12)}
+.nav-link .lbl{transition:transform .15s ease}.nav-link:hover .lbl{transform:translateX(2px)}
+.nav-link i{transition:transform .2s ease,opacity .15s ease}.nav-link:hover i{transform:scale(1.12)}
+.input,.select,textarea.input{transition:border-color .15s ease,box-shadow .15s ease}
+.badge{transition:transform .15s ease}.badge:hover{transform:translateY(-1px)}
+.tbl tbody tr{transition:background-color .15s ease}
+/* Menu samping (HP), lapisan gelap, dropdown, modal, toast */
+.sidebar{transition:transform .28s cubic-bezier(.2,.7,.2,1),box-shadow .28s ease,width .2s ease}
+.overlay:not(.hidden):not([hidden]){animation:mo-fade .2s ease}
+.user-dropdown:not([hidden]){animation:mo-drop .16s ease-out;transform-origin:top right}
+.modal.flex{animation:mo-fade .15s ease}.modal.flex .modal-box{animation:mo-pop .2s ease-out}
+.toast{animation:mo-slide-in .28s cubic-bezier(.2,.7,.2,1)}
+.live-pill i{will-change:opacity}
+
+/* ===== Penyesuaian layar HP ===== */
+@media (max-width:767px){
+  html{-webkit-text-size-adjust:100%}
+  body{overflow-x:hidden}
+  .content{padding:.75rem}
+  .input,.select,textarea.input,select.input{font-size:16px}            /* cegah zoom otomatis di iOS */
+  .btn{min-height:2.5rem}.btn-sm{min-height:2.1rem}
+  .icon-btn{min-width:2.5rem;min-height:2.5rem}
+  .panel-head{padding:.7rem .85rem}.panel-foot{padding:.65rem .85rem}
+  .panel-head .input,.panel-head .btn,.panel-head select{max-width:100%}
+  .table-wrap,.overflow-x{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .tbl{font-size:.82rem}.tbl th,.tbl td{padding:.55rem .6rem}
+  .metric{padding:.7rem .8rem}.metric-value{font-size:1.1rem}
+  .toasts{left:.75rem;right:.75rem;max-width:none}
+  .modal{align-items:flex-end;padding:0}
+  .modal .modal-box{max-width:none;border-radius:16px 16px 0 0;animation:mo-sheet .25s ease-out;padding-bottom:max(1.25rem,env(safe-area-inset-bottom))}
+  .modal-actions{flex-wrap:wrap}.modal-actions .btn{flex:1 1 8rem}
+  .form-actions{flex-wrap:wrap}.form-actions .btn{flex:1 1 9rem}
+  .topbar{padding-left:max(.75rem,env(safe-area-inset-left));padding-right:max(.75rem,env(safe-area-inset-right))}
+  .footbar{padding-bottom:max(.75rem,env(safe-area-inset-bottom))}
+}
+@media (max-width:420px){
+  .page-title{font-size:.95rem}
+  .metrics{grid-template-columns:1fr 1fr}
+  .switch-row{flex-direction:column;align-items:flex-start;gap:.6rem}
+}
+@media (hover:none){.panel:hover{box-shadow:none}.nav-link:hover .lbl{transform:none}.btn:hover:not([disabled]){box-shadow:none}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}

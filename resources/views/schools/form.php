@@ -1,0 +1,10 @@
+<?php $editing=(bool)$s; ?><section class="dist-page school-module">
+<header class="dist-head"><div><h2><?= e($title) ?></h2><p>Data sekolah digunakan untuk mengelola menu dan pengiriman.</p></div><a class="btn btn-ghost" href="<?= e(url('/admin/sekolah')) ?>">Kembali</a></header>
+<form class="dist-card" method="post" action="<?= e(url($editing?'/admin/sekolah/'.$s['id'].'/edit':'/admin/sekolah/baru')) ?>"><?= csrf_field() ?><div class="dist-card-body"><div class="dist-school-form">
+<label class="dist-field"><span>Nama sekolah <b>*</b></span><input class="input" required maxlength="150" name="name" value="<?= e($s['name']??'') ?>"></label>
+<label class="dist-field"><span>Nomor WhatsApp <b>*</b></span><input class="input" required name="whatsapp" placeholder="08xxxxxxxxxx" value="<?= e($s['whatsapp']??'') ?>"></label>
+<label class="dist-field dist-description"><span>Alamat lengkap <b>*</b></span><textarea class="input" required name="address" rows="3"><?= e($s['address']??'') ?></textarea></label>
+<label class="dist-field"><span>Jumlah siswa <b>*</b></span><input class="input" required type="number" min="0" step="1" name="daily_portions" value="<?= e($s['daily_portions']??0) ?>"></label>
+<label class="dist-field"><span>Status sekolah</span><select class="input" name="status"><option value="active" <?= ($s['status']??'active')==='active'?'selected':'' ?>>Aktif</option><option value="inactive" <?= ($s['status']??'')==='inactive'?'selected':'' ?>>Nonaktif</option></select></label>
+<label class="dist-field dist-description"><span>Titik koordinat sekolah <b>*</b></span><input class="input" required name="coords" inputmode="decimal" placeholder="-6.2088, 106.8456" value="<?= e(isset($s['latitude']) && $s['latitude'] !== null ? $s['latitude'] . ', ' . $s['longitude'] : '') ?>"></label>
+</div><div class="dist-actions"><button class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Simpan sekolah</button></div></div></form></section>

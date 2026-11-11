@@ -1,0 +1,5 @@
+# Untuk hosting/XAMPP tanpa mengubah document root: arahkan semua ke /public
+Options -Indexes
+RewriteEngine On
+RewriteRule ^public/ - [L]
+RewriteRule ^(.*)$ public/$1 [L]

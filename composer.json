@@ -1,0 +1,6 @@
+{
+  "name": "company/management",
+  "description": "Manajemen karyawan, penggajian, dan inventaris (PHP Native + MySQL)",
+  "type": "project",
+  "require": { "php": ">=8.0", "dompdf/dompdf": "^2.0" }
+}
